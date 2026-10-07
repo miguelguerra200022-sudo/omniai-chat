@@ -1,0 +1,49 @@
+# OmniAI - Configuración Maestro de LibreChat
+version: 1.2.1
+
+cache: true
+
+# Control de saldos y créditos para usuarios
+balance:
+  enabled: true
+  startBalance: 20000      # 20,000 tokens de bienvenida gratis
+  autoRefillEnabled: false # Requiere recarga para continuar
+
+transactions:
+  enabled: true
+
+# Proveedores y Modelos
+endpoints:
+  custom:
+    # 1. OpenRouter (Modelos Gratuitos y Catálogo Completo)
+    - name: 'OpenRouter'
+      apiKey: '${OPENROUTER_KEY}'
+      baseURL: 'https://openrouter.ai/api/v1'
+      models:
+        default:
+          - 'openrouter/free'
+          - 'meta-llama/llama-3.3-70b-instruct:free'
+          - 'google/gemini-2.0-flash-exp:free'
+        fetch: true
+      titleConvo: true
+      titleModel: 'openrouter/free'
+      dropParams: ['stop']
+      modelDisplayLabel: 'OpenRouter (Modelos Libres)'
+
+    # 2. AgentRouter (Modelos Avanzados GPT-6 / Claude Opus / $52 Saldo)
+    - name: 'AgentRouter'
+      apiKey: '${AGENTROUTER_KEY}'
+      baseURL: 'https://agentrouter.org/v1'
+      headers:
+        User-Agent: 'opencode/0.1.0'
+      models:
+        default:
+          - 'gpt-6-astra'
+          - 'claude-opus-5'
+          - 'claude-opus-4-8'
+          - 'deepseek-v4-flash'
+        fetch: false
+      titleConvo: true
+      titleModel: 'gpt-6-astra'
+      dropParams: ['stop']
+      modelDisplayLabel: 'AgentRouter Pro'

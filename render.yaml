@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: omniai-chat
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: PORT
+        value: "3080"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: APP_TITLE
+        value: "OmniAI"
+      - key: CONFIG_PATH
+        value: "/app/librechat.yaml"
+      - key: OPENROUTER_KEY
+        sync: false
+      - key: AGENTROUTER_KEY
+        sync: false
+      - key: CREDS_KEY
+        sync: false
+      - key: CREDS_IV
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: CHECK_BALANCE
+        value: "true"
+      - key: ALLOW_REGISTRATION
+        value: "true"
