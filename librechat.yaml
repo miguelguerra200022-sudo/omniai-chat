@@ -13,6 +13,8 @@ transactions:
   enabled: true
 
 endpoints:
+  agents:
+    capabilities: ["artifacts", "actions", "context", "skills", "tools"]
   custom:
     # 1. Google Gemini (Oficial Directo - 15 RPM Gratis)
     - name: 'Google Gemini'
