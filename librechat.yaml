@@ -64,9 +64,9 @@ endpoints:
           - 'llama-3.3-70b-versatile'
           - 'llama-3.1-8b-instant'
           - 'mixtral-8x7b-32768'
-        fetch: false
+        fetch: true
       titleConvo: true
-      titleModel: 'llama-3.1-8b-instant'
+      titleModel: 'llama-3.3-70b-versatile'
       modelDisplayLabel: 'Groq (Ultra-Rápido)'
 
     # 5. Cerebras (La inferencia más rápida del mundo: 2,000 tok/s)
