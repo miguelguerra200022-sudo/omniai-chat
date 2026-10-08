@@ -16,9 +16,19 @@ services:
         value: "OmniAI"
       - key: CONFIG_PATH
         value: "/app/librechat.yaml"
+      - key: ENDPOINTS
+        value: "custom"
       - key: OPENROUTER_KEY
         sync: false
       - key: AGENTROUTER_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: NVIDIA_API_KEY
+        sync: false
+      - key: SILICONFLOW_API_KEY
         sync: false
       - key: CREDS_KEY
         sync: false

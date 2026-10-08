@@ -14,7 +14,7 @@ transactions:
 
 endpoints:
   custom:
-    # 1. Google Gemini (Oficial Directo - Sin intermediarios ni demoras)
+    # 1. Google Gemini (Oficial Directo - 15 RPM / 1M TPM Gratis)
     - name: 'Google Gemini'
       apiKey: '${GEMINI_API_KEY}'
       baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai'
@@ -27,7 +27,7 @@ endpoints:
       titleModel: 'gemini-3.5-flash'
       modelDisplayLabel: 'Google Gemini (Flash)'
 
-    # 2. Groq (LPU Ultra-Rápido - Inferencia en < 100ms)
+    # 2. Groq (LPU Ultra-Rápido - Inferencia en < 100ms) - Auto-fetch activo
     - name: 'Groq'
       apiKey: '${GROQ_API_KEY}'
       baseURL: 'https://api.groq.com/openai/v1'
@@ -38,43 +38,43 @@ endpoints:
           - 'openai/gpt-oss-120b'
           - 'openai/gpt-oss-20b'
           - 'qwen/qwen3.8-27b'
-        fetch: false
+        fetch: true
       titleConvo: true
       titleModel: 'openai/gpt-oss-120b'
       modelDisplayLabel: 'Groq (Ultra-Rápido)'
 
-    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise)
+    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise) - Auto-fetch activo (80 modelos)
     - name: 'NVIDIA NIM'
       apiKey: '${NVIDIA_API_KEY}'
       baseURL: 'https://integrate.api.nvidia.com/v1'
       models:
         default:
           - 'meta/llama-3.2-11b-vision-instruct'
-        fetch: false
+        fetch: true
       titleConvo: true
       titleModel: 'meta/llama-3.2-11b-vision-instruct'
-      modelDisplayLabel: 'NVIDIA NIM (Llama 3.2 Vision)'
+      modelDisplayLabel: 'NVIDIA NIM (GPUs Enterprise)'
 
-    # 4. SiliconFlow (DeepSeek Hub)
+    # 4. SiliconFlow (DeepSeek Hub) - Auto-fetch activo (79 modelos)
     - name: 'SiliconFlow'
       apiKey: '${SILICONFLOW_API_KEY}'
       baseURL: 'https://api.siliconflow.com/v1'
       models:
         default:
           - 'deepseek-ai/DeepSeek-V4.1-Flash'
-        fetch: false
+        fetch: true
       titleConvo: true
       titleModel: 'deepseek-ai/DeepSeek-V4.1-Flash'
       modelDisplayLabel: 'SiliconFlow (DeepSeek)'
 
-    # 5. OpenRouter (Modelos Libres Adicionales)
+    # 5. OpenRouter (Catálogo Completo Comunitario) - Auto-fetch activo
     - name: 'OpenRouter'
       apiKey: '${OPENROUTER_KEY}'
       baseURL: 'https://openrouter.ai/api/v1'
       models:
         default:
           - 'openrouter/free'
-        fetch: false
+        fetch: true
       titleConvo: false
       dropParams: ['stop']
       modelDisplayLabel: 'OpenRouter (Comunidad)'
