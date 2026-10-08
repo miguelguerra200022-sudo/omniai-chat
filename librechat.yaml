@@ -14,67 +14,96 @@ transactions:
 
 endpoints:
   custom:
-    # 1. Google Gemini (Oficial Directo - 15 RPM / 1M TPM Gratis)
+    # 1. Google Gemini (Oficial Directo - 15 RPM Gratis)
     - name: 'Google Gemini'
       apiKey: '${GEMINI_API_KEY}'
       baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai'
       models:
         default:
-          - 'gemini-3.5-flash'
+          - 'gemini-3.8-flash'
+          - 'gemini-3.5-flash-lite'
           - 'gemini-flash-latest'
         fetch: false
       titleConvo: true
-      titleModel: 'gemini-3.5-flash'
+      titleModel: 'gemini-3.8-flash'
       modelDisplayLabel: 'Google Gemini (Flash)'
 
-    # 2. Groq (LPU Ultra-Rápido - Inferencia en < 100ms) - Auto-fetch de todos los modelos
-    - name: 'Groq'
-      apiKey: '${GROQ_API_KEY}'
-      baseURL: 'https://api.groq.com/openai/v1'
-      headers:
-        User-Agent: 'curl/7.68.0'
-      models:
-        default:
-          - 'openai/gpt-oss-120b'
-          - 'openai/gpt-oss-20b'
-          - 'qwen/qwen3.8-27b'
-        fetch: true
-      titleConvo: true
-      titleModel: 'openai/gpt-oss-120b'
-      modelDisplayLabel: 'Groq (Ultra-Rápido)'
-
-    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise) - Auto-fetch de 80 modelos
-    - name: 'NVIDIA NIM'
-      apiKey: '${NVIDIA_API_KEY}'
-      baseURL: 'https://integrate.api.nvidia.com/v1'
-      models:
-        default:
-          - 'meta/llama-3.2-11b-vision-instruct'
-        fetch: true
-      titleConvo: true
-      titleModel: 'meta/llama-3.2-11b-vision-instruct'
-      modelDisplayLabel: 'NVIDIA NIM (GPUs Enterprise)'
-
-    # 4. SiliconFlow (DeepSeek Hub) - Auto-fetch de 79 modelos
+    # 2. SiliconFlow (DeepSeek Hub - Modelos Verificados y Activos)
     - name: 'SiliconFlow'
       apiKey: '${SILICONFLOW_API_KEY}'
       baseURL: 'https://api.siliconflow.com/v1'
       models:
         default:
           - 'deepseek-ai/DeepSeek-V4.1-Flash'
-        fetch: true
+          - 'deepseek-ai/DeepSeek-V3'
+          - 'Qwen/Qwen3.5-9B'
+        fetch: false
       titleConvo: true
       titleModel: 'deepseek-ai/DeepSeek-V4.1-Flash'
       modelDisplayLabel: 'SiliconFlow (DeepSeek)'
 
-    # 5. OpenRouter (Modelos Libres Ligeros - Evitar OOM de 500 modelos)
+    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise)
+    - name: 'NVIDIA NIM'
+      apiKey: '${NVIDIA_API_KEY}'
+      baseURL: 'https://integrate.api.nvidia.com/v1'
+      models:
+        default:
+          - 'meta/llama-3.2-11b-vision-instruct'
+          - 'meta/llama-3.2-90b-vision-instruct'
+        fetch: false
+      titleConvo: true
+      titleModel: 'meta/llama-3.2-11b-vision-instruct'
+      modelDisplayLabel: 'NVIDIA NIM (GPUs Enterprise)'
+
+    # 4. Groq (LPU Ultra-Rápido)
+    - name: 'Groq'
+      apiKey: '${GROQ_API_KEY}'
+      baseURL: 'https://api.groq.com/openai/v1'
+      models:
+        default:
+          - 'llama-3.3-70b-versatile'
+          - 'llama-3.1-8b-instant'
+          - 'mixtral-8x7b-32768'
+        fetch: false
+      titleConvo: true
+      titleModel: 'llama-3.1-8b-instant'
+      modelDisplayLabel: 'Groq (Ultra-Rápido)'
+
+    # 5. Cerebras (La inferencia más rápida del mundo: 2,000 tok/s)
+    - name: 'Cerebras'
+      apiKey: '${CEREBRAS_API_KEY}'
+      baseURL: 'https://api.cerebras.ai/v1'
+      models:
+        default:
+          - 'llama-3.3-70b'
+          - 'llama3.1-8b'
+        fetch: false
+      titleConvo: true
+      titleModel: 'llama3.1-8b'
+      modelDisplayLabel: 'Cerebras (LPU 2k tok/s)'
+
+    # 6. SambaNova (Acceso a Llama 405B Gratuito)
+    - name: 'SambaNova'
+      apiKey: '${SAMBANOVA_API_KEY}'
+      baseURL: 'https://api.sambanova.ai/v1'
+      models:
+        default:
+          - 'Meta-Llama-3.1-405B-Instruct'
+          - 'Meta-Llama-3.3-70B-Instruct'
+          - 'Meta-Llama-3.1-8B-Instruct'
+        fetch: false
+      titleConvo: true
+      titleModel: 'Meta-Llama-3.1-8B-Instruct'
+      modelDisplayLabel: 'SambaNova (Llama 405B)'
+
+    # 7. OpenRouter (Modelos Libres)
     - name: 'OpenRouter'
       apiKey: '${OPENROUTER_KEY}'
       baseURL: 'https://openrouter.ai/api/v1'
       models:
         default:
-          - 'openrouter/free'
           - 'meta-llama/llama-3.3-70b-instruct:free'
+          - 'google/gemini-2.0-flash-exp:free'
         fetch: false
       titleConvo: false
       dropParams: ['stop']

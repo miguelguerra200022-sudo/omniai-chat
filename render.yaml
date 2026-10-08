@@ -32,6 +32,10 @@ services:
         sync: false
       - key: SILICONFLOW_API_KEY
         sync: false
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: SAMBANOVA_API_KEY
+        sync: false
       - key: CREDS_KEY
         sync: false
       - key: CREDS_IV
