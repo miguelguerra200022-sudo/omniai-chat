@@ -3,7 +3,7 @@ version: 1.2.1
 
 cache: true
 
-# Control de saldos y créditos para usuarios
+# Control de saldos y créditos para usuarios (Monetización)
 balance:
   enabled: true
   startBalance: 20000      # 20,000 tokens de bienvenida gratis
@@ -12,38 +12,69 @@ balance:
 transactions:
   enabled: true
 
-# Proveedores y Modelos
 endpoints:
   custom:
-    # 1. OpenRouter (Modelos Gratuitos y Catálogo Completo)
+    # 1. Google Gemini (Oficial Directo - Sin intermediarios ni demoras)
+    - name: 'Google Gemini'
+      apiKey: '${GEMINI_API_KEY}'
+      baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai'
+      models:
+        default:
+          - 'gemini-3.5-flash'
+          - 'gemini-flash-latest'
+        fetch: false
+      titleConvo: true
+      titleModel: 'gemini-3.5-flash'
+      modelDisplayLabel: 'Google Gemini (Flash)'
+
+    # 2. Groq (LPU Ultra-Rápido - Inferencia en < 100ms)
+    - name: 'Groq'
+      apiKey: '${GROQ_API_KEY}'
+      baseURL: 'https://api.groq.com/openai/v1'
+      headers:
+        User-Agent: 'curl/7.68.0'
+      models:
+        default:
+          - 'openai/gpt-oss-120b'
+          - 'openai/gpt-oss-20b'
+          - 'qwen/qwen3.8-27b'
+        fetch: false
+      titleConvo: true
+      titleModel: 'openai/gpt-oss-120b'
+      modelDisplayLabel: 'Groq (Ultra-Rápido)'
+
+    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise)
+    - name: 'NVIDIA NIM'
+      apiKey: '${NVIDIA_API_KEY}'
+      baseURL: 'https://integrate.api.nvidia.com/v1'
+      models:
+        default:
+          - 'meta/llama-3.2-11b-vision-instruct'
+        fetch: false
+      titleConvo: true
+      titleModel: 'meta/llama-3.2-11b-vision-instruct'
+      modelDisplayLabel: 'NVIDIA NIM (Llama 3.2 Vision)'
+
+    # 4. SiliconFlow (DeepSeek Hub)
+    - name: 'SiliconFlow'
+      apiKey: '${SILICONFLOW_API_KEY}'
+      baseURL: 'https://api.siliconflow.com/v1'
+      models:
+        default:
+          - 'deepseek-ai/DeepSeek-V4.1-Flash'
+        fetch: false
+      titleConvo: true
+      titleModel: 'deepseek-ai/DeepSeek-V4.1-Flash'
+      modelDisplayLabel: 'SiliconFlow (DeepSeek)'
+
+    # 5. OpenRouter (Modelos Libres Adicionales)
     - name: 'OpenRouter'
       apiKey: '${OPENROUTER_KEY}'
       baseURL: 'https://openrouter.ai/api/v1'
       models:
         default:
           - 'openrouter/free'
-          - 'meta-llama/llama-3.3-70b-instruct:free'
-          - 'google/gemini-2.0-flash-exp:free'
-        fetch: true
-      titleConvo: true
-      titleModel: 'openrouter/free'
-      dropParams: ['stop']
-      modelDisplayLabel: 'OpenRouter (Modelos Libres)'
-
-    # 2. AgentRouter (Modelos Avanzados GPT-6 / Claude Opus / $52 Saldo)
-    - name: 'AgentRouter'
-      apiKey: '${AGENTROUTER_KEY}'
-      baseURL: 'https://agentrouter.org/v1'
-      headers:
-        User-Agent: 'opencode/0.1.0'
-      models:
-        default:
-          - 'gpt-6-astra'
-          - 'claude-opus-5'
-          - 'claude-opus-4-8'
-          - 'deepseek-v4-flash'
         fetch: false
-      titleConvo: true
-      titleModel: 'gpt-6-astra'
+      titleConvo: false
       dropParams: ['stop']
-      modelDisplayLabel: 'AgentRouter Pro'
+      modelDisplayLabel: 'OpenRouter (Comunidad)'
