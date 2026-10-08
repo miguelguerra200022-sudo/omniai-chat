@@ -27,7 +27,7 @@ endpoints:
       titleModel: 'gemini-3.5-flash'
       modelDisplayLabel: 'Google Gemini (Flash)'
 
-    # 2. Groq (LPU Ultra-Rápido - Inferencia en < 100ms) - Auto-fetch activo
+    # 2. Groq (LPU Ultra-Rápido - Inferencia en < 100ms) - Auto-fetch de todos los modelos
     - name: 'Groq'
       apiKey: '${GROQ_API_KEY}'
       baseURL: 'https://api.groq.com/openai/v1'
@@ -43,7 +43,7 @@ endpoints:
       titleModel: 'openai/gpt-oss-120b'
       modelDisplayLabel: 'Groq (Ultra-Rápido)'
 
-    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise) - Auto-fetch activo (80 modelos)
+    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise) - Auto-fetch de 80 modelos
     - name: 'NVIDIA NIM'
       apiKey: '${NVIDIA_API_KEY}'
       baseURL: 'https://integrate.api.nvidia.com/v1'
@@ -55,7 +55,7 @@ endpoints:
       titleModel: 'meta/llama-3.2-11b-vision-instruct'
       modelDisplayLabel: 'NVIDIA NIM (GPUs Enterprise)'
 
-    # 4. SiliconFlow (DeepSeek Hub) - Auto-fetch activo (79 modelos)
+    # 4. SiliconFlow (DeepSeek Hub) - Auto-fetch de 79 modelos
     - name: 'SiliconFlow'
       apiKey: '${SILICONFLOW_API_KEY}'
       baseURL: 'https://api.siliconflow.com/v1'
@@ -67,14 +67,15 @@ endpoints:
       titleModel: 'deepseek-ai/DeepSeek-V4.1-Flash'
       modelDisplayLabel: 'SiliconFlow (DeepSeek)'
 
-    # 5. OpenRouter (Catálogo Completo Comunitario) - Auto-fetch activo
+    # 5. OpenRouter (Modelos Libres Ligeros - Evitar OOM de 500 modelos)
     - name: 'OpenRouter'
       apiKey: '${OPENROUTER_KEY}'
       baseURL: 'https://openrouter.ai/api/v1'
       models:
         default:
           - 'openrouter/free'
-        fetch: true
+          - 'meta-llama/llama-3.3-70b-instruct:free'
+        fetch: false
       titleConvo: false
       dropParams: ['stop']
       modelDisplayLabel: 'OpenRouter (Comunidad)'

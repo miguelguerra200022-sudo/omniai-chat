@@ -16,6 +16,8 @@ services:
         value: "OmniAI"
       - key: CONFIG_PATH
         value: "/app/librechat.yaml"
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=460"
       - key: ENDPOINTS
         value: "custom"
       - key: OPENROUTER_KEY
