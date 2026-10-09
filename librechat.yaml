@@ -38,6 +38,9 @@ modelSpecs:
       preset:
         endpoint: "Google Gemini"
         model: "gemini-flash-lite-latest"
+        maxContextTokens: 1048576
+        model_parameters:
+          maxContextTokens: 1048576
         promptPrefix: |
           Eres OmniAI, el asistente de inteligencia artificial y entorno de computación interactivo más avanzado.
           Cuentas con un motor de ejecución en el cliente basado en WebAssembly y Artefactos Interactivos, lo que te permite ejecutar código real, procesar datos, gestionar bases de datos relacionales y empaquetar proyectos enteros sin depender de servidores lentos.
@@ -109,6 +112,9 @@ modelSpecs:
       preset:
         endpoint: "NVIDIA NIM"
         model: "meta/llama-3.2-90b-vision-instruct"
+        maxContextTokens: 131072
+        model_parameters:
+          maxContextTokens: 131072
         promptPrefix: |
           Eres OmniAI, el asistente de inteligencia artificial y entorno de computación interactivo más avanzado.
           Cuentas con un motor de ejecución en el cliente basado en WebAssembly y Artefactos Interactivos, lo que te permite ejecutar código real, procesar datos, gestionar bases de datos relacionales y empaquetar proyectos enteros sin depender de servidores lentos.
@@ -154,6 +160,9 @@ modelSpecs:
       preset:
         endpoint: "NVIDIA NIM"
         model: "meta/llama-3.2-11b-vision-instruct"
+        maxContextTokens: 131072
+        model_parameters:
+          maxContextTokens: 131072
         promptPrefix: |
           Eres OmniAI, el asistente de inteligencia artificial y entorno de computación interactivo más avanzado.
           Cuentas con un motor de ejecución en el cliente basado en WebAssembly y Artefactos Interactivos, lo que te permite ejecutar código real, procesar datos, gestionar bases de datos relacionales y empaquetar proyectos enteros sin depender de servidores lentos.
@@ -199,6 +208,19 @@ endpoints:
           - "gemini-flash-latest"
           - "gemini-3.8-flash"
         fetch: false
+      tokenConfig:
+        gemini-flash-lite-latest:
+          prompt: 0.15
+          completion: 0.6
+          context: 1048576
+        gemini-flash-latest:
+          prompt: 0.15
+          completion: 0.6
+          context: 1048576
+        gemini-3.8-flash:
+          prompt: 0.15
+          completion: 0.6
+          context: 1048576
       titleConvo: true
       titleModel: "gemini-flash-lite-latest"
       modelDisplayLabel: "Google Gemini (Flash Lite)"
@@ -212,6 +234,15 @@ endpoints:
           - "meta/llama-3.2-90b-vision-instruct"
           - "meta/llama-3.2-11b-vision-instruct"
         fetch: false
+      tokenConfig:
+        "meta/llama-3.2-90b-vision-instruct":
+          prompt: 0.35
+          completion: 0.7
+          context: 131072
+        "meta/llama-3.2-11b-vision-instruct":
+          prompt: 0.15
+          completion: 0.3
+          context: 131072
       titleConvo: true
       titleModel: "meta/llama-3.2-90b-vision-instruct"
       modelDisplayLabel: "NVIDIA NIM (GPUs Enterprise)"
@@ -225,6 +256,15 @@ endpoints:
           - "deepseek-ai/DeepSeek-V3"
           - "Qwen/Qwen3.5-9B"
         fetch: false
+      tokenConfig:
+        "deepseek-ai/DeepSeek-V3":
+          prompt: 0.14
+          completion: 0.28
+          context: 131072
+        "Qwen/Qwen3.5-9B":
+          prompt: 0.14
+          completion: 0.28
+          context: 131072
       titleConvo: true
       titleModel: "deepseek-ai/DeepSeek-V3"
       modelDisplayLabel: "SiliconFlow (DeepSeek)"
@@ -238,6 +278,15 @@ endpoints:
           - "llama-3.3-70b-versatile"
           - "llama-3.1-8b-instant"
         fetch: false
+      tokenConfig:
+        "llama-3.3-70b-versatile":
+          prompt: 0.59
+          completion: 0.79
+          context: 131072
+        "llama-3.1-8b-instant":
+          prompt: 0.05
+          completion: 0.08
+          context: 131072
       titleConvo: true
       titleModel: "llama-3.3-70b-versatile"
       modelDisplayLabel: "Groq (Ultra-Rápido)"
@@ -251,6 +300,15 @@ endpoints:
           - "llama-3.3-70b"
           - "llama3.1-8b"
         fetch: false
+      tokenConfig:
+        "llama-3.3-70b":
+          prompt: 0.6
+          completion: 1.2
+          context: 131072
+        "llama3.1-8b":
+          prompt: 0.1
+          completion: 0.2
+          context: 131072
       titleConvo: true
       titleModel: "llama3.1-8b"
       modelDisplayLabel: "Cerebras (LPU 2k tok/s)"
@@ -264,6 +322,15 @@ endpoints:
           - "Meta-Llama-3.1-8B-Instruct"
           - "Meta-Llama-3.3-70B-Instruct"
         fetch: false
+      tokenConfig:
+        "Meta-Llama-3.1-8B-Instruct":
+          prompt: 0.1
+          completion: 0.2
+          context: 131072
+        "Meta-Llama-3.3-70B-Instruct":
+          prompt: 0.6
+          completion: 1.2
+          context: 131072
       titleConvo: true
       titleModel: "Meta-Llama-3.1-8B-Instruct"
       modelDisplayLabel: "SambaNova (Llama)"
