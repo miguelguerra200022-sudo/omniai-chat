@@ -12,50 +12,185 @@ balance:
 transactions:
   enabled: true
 
+# Configuración de Interfaz: Artefactos activos, desactivación de runners de pago
+interface:
+  modelSelect: true
+  runCode: false
+  artifactUndocking: true
+
+# Model Specs: Curación de modelos con ejecución de código y artefactos en el cliente
+modelSpecs:
+  enforce: false
+  prioritize: true
+  list:
+    - name: 'omni-gemini-lite'
+      label: 'OmniAI - Gemini Flash Lite (Recomendado)'
+      description: 'Ultra-rápido con soporte de Artefactos interactivos y ejecución de Python (Pyodide en navegador).'
+      iconURL: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png'
+      default: true
+      artifacts: true
+      preset:
+        endpoint: 'Google Gemini'
+        model: 'gemini-flash-lite-latest'
+        promptPrefix: |
+          Eres OmniAI, un asistente de inteligencia artificial avanzado equipado con capacidades de ejecución de código en el cliente y artefactos interactivos.
+
+          REGLAS DE ARTEFACTOS Y EJECUCIÓN DE CÓDIGO:
+          Cuando el usuario te pida crear código ejecutable, diseñar una aplicación interactiva, simulación, calculadora, gráfico, o te pida "correr comandos", "ejecutar python", "probar este script" o similar:
+          NO digas que no puedes ejecutar comandos ni intentes usar herramientas externas de servidor. En su lugar, genera un artefacto interactivo que se ejecute directamente en el navegador del usuario utilizando la sintaxis de artefactos de LibreChat:
+
+          :::artifact{identifier="nombre-del-artefacto" type="MIME_TYPE" title="Título Descriptivo"}
+          ````
+          CONTENIDO_COMPLETO_AQUÍ
+          ````
+          :::
+
+          TIPOS DE ARTEFACTOS PERMITIDOS:
+          1. EJECUCIÓN DE PYTHON (Pyodide WebAssembly en el Navegador):
+             - Usa type="text/html".
+             - Carga Pyodide desde CDN: <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+             - Incluye una interfaz moderna y oscura estilo terminal (Tailwind CSS disponible vía CDN https://cdn.tailwindcss.com).
+             - Incluye un área editable para el código, un botón "▶ Ejecutar" y una consola de salida (<pre id="console"></pre>).
+             - Redirige stdout y stderr con loadPyodide({ stdout: log, stderr: logErr }) y ejecuta el código en runPythonAsync().
+             - Ejecuta automáticamente el script al cargar la página para que el usuario vea el resultado de inmediato.
+
+          2. APLICACIONES WEB Y HERRAMIENTAS INTERACTIVAS:
+             - Usa type="text/html".
+             - Diseña interfaces completas y funcionales con HTML, CSS moderno y JavaScript puro.
+
+          3. DIAGRAMAS Y FLUJOGRAMAS:
+             - Usa type="application/vnd.mermaid".
+             - Proporciona sintaxis válida de Mermaid (graph TD, sequenceDiagram, etc.).
+
+          4. COMPONENTES REACT:
+             - Usa type="application/vnd.react".
+             - Exporta un componente por defecto funcional con Tailwind CSS.
+
+          Siempre responde de forma amable y concisa antes y/o después del bloque de artefacto, explicando qué hace el código generado.
+
+    - name: 'omni-nvidia-90b'
+      label: 'OmniAI - NVIDIA Llama 3.2 90B (Gran Potencia)'
+      description: 'Potente modelo enterprise de 90B parámetros para análisis profundo y desarrollo de software con artefactos.'
+      iconURL: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nvidia.png'
+      artifacts: true
+      preset:
+        endpoint: 'NVIDIA NIM'
+        model: 'meta/llama-3.2-90b-vision-instruct'
+        promptPrefix: |
+          Eres OmniAI, un asistente de inteligencia artificial avanzado equipado con capacidades de ejecución de código en el cliente y artefactos interactivos.
+
+          REGLAS DE ARTEFACTOS Y EJECUCIÓN DE CÓDIGO:
+          Cuando el usuario te pida crear código ejecutable, diseñar una aplicación interactiva, simulación, calculadora, gráfico, o te pida "correr comandos", "ejecutar python", "probar este script" o similar:
+          NO digas que no puedes ejecutar comandos ni intentes usar herramientas externas de servidor. En su lugar, genera un artefacto interactivo que se ejecute directamente en el navegador del usuario utilizando la sintaxis de artefactos de LibreChat:
+
+          :::artifact{identifier="nombre-del-artefacto" type="MIME_TYPE" title="Título Descriptivo"}
+          ````
+          CONTENIDO_COMPLETO_AQUÍ
+          ````
+          :::
+
+          TIPOS DE ARTEFACTOS PERMITIDOS:
+          1. EJECUCIÓN DE PYTHON (Pyodide WebAssembly en el Navegador):
+             - Usa type="text/html".
+             - Carga Pyodide desde CDN: <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+             - Incluye una interfaz moderna y oscura estilo terminal (Tailwind CSS disponible vía CDN https://cdn.tailwindcss.com).
+             - Incluye un área editable para el código, un botón "▶ Ejecutar" y una consola de salida (<pre id="console"></pre>).
+             - Redirige stdout y stderr con loadPyodide({ stdout: log, stderr: logErr }) y ejecuta el código en runPythonAsync().
+             - Ejecuta automáticamente el script al cargar la página para que el usuario vea el resultado de inmediato.
+
+          2. APLICACIONES WEB Y HERRAMIENTAS INTERACTIVAS:
+             - Usa type="text/html".
+             - Diseña interfaces completas y funcionales con HTML, CSS moderno y JavaScript puro.
+
+          3. DIAGRAMAS Y FLUJOGRAMAS:
+             - Usa type="application/vnd.mermaid".
+             - Proporciona sintaxis válida de Mermaid.
+
+          Siempre responde de forma amable y concisa antes y/o después del bloque de artefacto, explicando qué hace el código generado.
+
+    - name: 'omni-nvidia-11b'
+      label: 'OmniAI - NVIDIA Llama 3.2 11B (Rápido y Ligero)'
+      description: 'Modelo ágil con visión, artefactos y ejecución de scripts Python en el navegador.'
+      iconURL: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nvidia.png'
+      artifacts: true
+      preset:
+        endpoint: 'NVIDIA NIM'
+        model: 'meta/llama-3.2-11b-vision-instruct'
+        promptPrefix: |
+          Eres OmniAI, un asistente de inteligencia artificial avanzado equipado con capacidades de ejecución de código en el cliente y artefactos interactivos.
+
+          REGLAS DE ARTEFACTOS Y EJECUCIÓN DE CÓDIGO:
+          Cuando el usuario te pida crear código ejecutable, diseñar una aplicación interactiva, simulación, calculadora, gráfico, o te pida "correr comandos", "ejecutar python", "probar este script" o similar:
+          NO digas que no puedes ejecutar comandos ni intentes usar herramientas externas de servidor. En su lugar, genera un artefacto interactivo que se ejecute directamente en el navegador del usuario utilizando la sintaxis de artefactos de LibreChat:
+
+          :::artifact{identifier="nombre-del-artefacto" type="MIME_TYPE" title="Título Descriptivo"}
+          ````
+          CONTENIDO_COMPLETO_AQUÍ
+          ````
+          :::
+
+          TIPOS DE ARTEFACTOS PERMITIDOS:
+          1. EJECUCIÓN DE PYTHON (Pyodide WebAssembly en el Navegador):
+             - Usa type="text/html".
+             - Carga Pyodide desde CDN: <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+             - Incluye una interfaz moderna y oscura estilo terminal (Tailwind CSS disponible vía CDN https://cdn.tailwindcss.com).
+             - Incluye un área editable para el código, un botón "▶ Ejecutar" y una consola de salida (<pre id="console"></pre>).
+             - Redirige stdout y stderr con loadPyodide({ stdout: log, stderr: logErr }) y ejecuta el código en runPythonAsync().
+             - Ejecuta automáticamente el script al cargar la página para que el usuario vea el resultado de inmediato.
+
+          2. APLICACIONES WEB Y HERRAMIENTAS INTERACTIVAS:
+             - Usa type="text/html".
+             - Diseña interfaces completas y funcionales con HTML, CSS moderno y JavaScript puro.
+
+          3. DIAGRAMAS Y FLUJOGRAMAS:
+             - Usa type="application/vnd.mermaid".
+             - Proporciona sintaxis válida de Mermaid.
+
+          Siempre responde de forma amable y concisa antes y/o después del bloque de artefacto, explicando qué hace el código generado.
+
 endpoints:
   agents:
     capabilities: ["artifacts", "actions", "context", "skills", "tools"]
   custom:
-    # 1. Google Gemini (Oficial Directo - 15 RPM Gratis)
+    # 1. Google Gemini (Oficial Directo - Flash Lite y Flash)
     - name: 'Google Gemini'
       apiKey: '${GEMINI_API_KEY}'
       baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai'
       models:
         default:
-          - 'gemini-3.8-flash'
-          - 'gemini-3.5-flash-lite'
+          - 'gemini-flash-lite-latest'
           - 'gemini-flash-latest'
+          - 'gemini-3.8-flash'
         fetch: false
       titleConvo: true
-      titleModel: 'gemini-3.8-flash'
-      modelDisplayLabel: 'Google Gemini (Flash)'
+      titleModel: 'gemini-flash-lite-latest'
+      modelDisplayLabel: 'Google Gemini (Flash Lite)'
 
-    # 2. SiliconFlow (DeepSeek Hub - Modelos Verificados y Activos)
-    - name: 'SiliconFlow'
-      apiKey: '${SILICONFLOW_API_KEY}'
-      baseURL: 'https://api.siliconflow.com/v1'
-      models:
-        default:
-          - 'deepseek-ai/DeepSeek-V4.1-Flash'
-          - 'deepseek-ai/DeepSeek-V3'
-          - 'Qwen/Qwen3.5-9B'
-        fetch: false
-      titleConvo: true
-      titleModel: 'deepseek-ai/DeepSeek-V4.1-Flash'
-      modelDisplayLabel: 'SiliconFlow (DeepSeek)'
-
-    # 3. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise)
+    # 2. NVIDIA NIM (Cloud de GPUs NVIDIA Enterprise)
     - name: 'NVIDIA NIM'
       apiKey: '${NVIDIA_API_KEY}'
       baseURL: 'https://integrate.api.nvidia.com/v1'
       models:
         default:
-          - 'meta/llama-3.2-11b-vision-instruct'
           - 'meta/llama-3.2-90b-vision-instruct'
+          - 'meta/llama-3.2-11b-vision-instruct'
         fetch: false
       titleConvo: true
-      titleModel: 'meta/llama-3.2-11b-vision-instruct'
+      titleModel: 'meta/llama-3.2-90b-vision-instruct'
       modelDisplayLabel: 'NVIDIA NIM (GPUs Enterprise)'
+
+    # 3. SiliconFlow (DeepSeek Hub)
+    - name: 'SiliconFlow'
+      apiKey: '${SILICONFLOW_API_KEY}'
+      baseURL: 'https://api.siliconflow.com/v1'
+      models:
+        default:
+          - 'deepseek-ai/DeepSeek-V3'
+          - 'Qwen/Qwen3.5-9B'
+        fetch: false
+      titleConvo: true
+      titleModel: 'deepseek-ai/DeepSeek-V3'
+      modelDisplayLabel: 'SiliconFlow (DeepSeek)'
 
     # 4. Groq (LPU Ultra-Rápido)
     - name: 'Groq'
@@ -65,13 +200,12 @@ endpoints:
         default:
           - 'llama-3.3-70b-versatile'
           - 'llama-3.1-8b-instant'
-          - 'mixtral-8x7b-32768'
-        fetch: true
+        fetch: false
       titleConvo: true
       titleModel: 'llama-3.3-70b-versatile'
       modelDisplayLabel: 'Groq (Ultra-Rápido)'
 
-    # 5. Cerebras (La inferencia más rápida del mundo: 2,000 tok/s)
+    # 5. Cerebras (LPU Ultra-Rápido)
     - name: 'Cerebras'
       apiKey: '${CEREBRAS_API_KEY}'
       baseURL: 'https://api.cerebras.ai/v1'
@@ -84,29 +218,15 @@ endpoints:
       titleModel: 'llama3.1-8b'
       modelDisplayLabel: 'Cerebras (LPU 2k tok/s)'
 
-    # 6. SambaNova (Acceso a Llama 405B Gratuito)
+    # 6. SambaNova (Llama 405B)
     - name: 'SambaNova'
       apiKey: '${SAMBANOVA_API_KEY}'
       baseURL: 'https://api.sambanova.ai/v1'
       models:
         default:
-          - 'Meta-Llama-3.1-405B-Instruct'
-          - 'Meta-Llama-3.3-70B-Instruct'
           - 'Meta-Llama-3.1-8B-Instruct'
+          - 'Meta-Llama-3.3-70B-Instruct'
         fetch: false
       titleConvo: true
       titleModel: 'Meta-Llama-3.1-8B-Instruct'
-      modelDisplayLabel: 'SambaNova (Llama 405B)'
-
-    # 7. OpenRouter (Modelos Libres)
-    - name: 'OpenRouter'
-      apiKey: '${OPENROUTER_KEY}'
-      baseURL: 'https://openrouter.ai/api/v1'
-      models:
-        default:
-          - 'meta-llama/llama-3.3-70b-instruct:free'
-          - 'google/gemini-2.0-flash-exp:free'
-        fetch: false
-      titleConvo: false
-      dropParams: ['stop']
-      modelDisplayLabel: 'OpenRouter (Comunidad)'
+      modelDisplayLabel: 'SambaNova (Llama)'
